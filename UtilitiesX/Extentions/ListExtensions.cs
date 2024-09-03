@@ -6,16 +6,45 @@ using System.Threading.Tasks;
 
 namespace UtilitiesX.Extentions
 {
-    public static class ListExtensions
+    public static class IEnumerableExtensions
     {
-        public static List<T> Collect<T>(this List<List<T>> l)
+        public static IEnumerable<U> Transform<T, U>(this IEnumerable<T> source, Func<T, U> transformer)
         {
-            List<T> result = new List<T>();
-            foreach (var t in l)
+            foreach (var item in source)
             {
-                result.AddRange(t);
+                yield return transformer(item);
+            }
+        }
+
+        public static T Collect<T, V>(this IEnumerable<V> l, T collection, Func<V, T,T> Collector)
+        {
+            for (int i = 0; i < l.Count(); i++)
+                collection = Collector(l.ElementAt(i), collection);
+            return collection;
+        }
+    }
+    public static class ICollectionExtensions
+    {
+        public static ICollection<T> Collect<T>(this ICollection<ICollection<T>> l)
+        {
+            ICollection<T> result = default;
+            foreach (var c in l)
+            {
+                foreach(var i in c)
+                    result.Add(i);
             }
             return result;
+        }
+        public static ICollection<T> Expand<T>(this List<T> l,T item)
+        {
+            l.Add(item);
+            return l;
+        }
+        public static ICollection<T> Expand<T>(this ICollection<T> l, IEnumerable<T> items)
+        {
+            foreach(var i in items)
+                l.Add(i);
+            return l;
         }
     }
 }
