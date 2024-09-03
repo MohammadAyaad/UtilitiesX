@@ -8,6 +8,16 @@ namespace UtilitiesX.Extentions
 {
     public static class IEnumerableExtensions
     {
+        public static IDictionary<TKey, TValue> Map<T, TKey, TValue>(this IEnumerable<T> source, Func<T, TKey> keySelector, Func<T, TValue> valueSelector)
+        {
+            IDictionary<TKey, TValue> result = new Dictionary<TKey, TValue>();
+            foreach (var item in source)
+            {
+                result[keySelector(item)] = valueSelector(item);
+            }
+            return result;
+        }
+
         public static IEnumerable<U> Transform<T, U>(this IEnumerable<T> source, Func<T, U> transformer)
         {
             foreach (var item in source)
