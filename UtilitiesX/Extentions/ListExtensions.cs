@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace UtilitiesX.Extentions
 {
+    public static class ObjectExtensions
+    {
+        public static V Transform<T,V>(this T obj, Func<T,V> transformer)
+        {
+            return transformer(obj);
+        }
+    }
     public static class IEnumerableExtensions
     {
         public static IDictionary<TKey, TValue> Map<T, TKey, TValue>(this IEnumerable<T> source, Func<T, TKey> keySelector, Func<T, TValue> valueSelector)
@@ -32,7 +39,7 @@ namespace UtilitiesX.Extentions
                 collection = Collector(l.ElementAt(i), collection);
             return collection;
         }
-    }
+    }       
     public static class ICollectionExtensions
     {
         public static ICollection<T> Collect<T>(this ICollection<ICollection<T>> l)
