@@ -37,7 +37,7 @@ namespace UtilitiesX.Extentions
     {
         public static ICollection<T> Collect<T>(this ICollection<ICollection<T>> l)
         {
-            ICollection<T> result = default;
+            ICollection<T> result = new List<T>();
             foreach (var c in l)
             {
                 foreach(var i in c)
