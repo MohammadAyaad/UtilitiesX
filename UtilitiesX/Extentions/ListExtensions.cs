@@ -39,19 +39,19 @@ namespace UtilitiesX.Extentions
                 collection = Collector(l.ElementAt(i), collection);
             return collection;
         }
-    }       
-    public static class ICollectionExtensions
-    {
-        public static ICollection<T> Collect<T>(this ICollection<ICollection<T>> l)
+        public static IEnumerable<T> Collect<T>(this IEnumerable<IEnumerable<T>> l)
         {
-            ICollection<T> result = new List<T>();
+            List<T> result = new List<T>();
             foreach (var c in l)
             {
-                foreach(var i in c)
+                foreach (var i in c)
                     result.Add(i);
             }
             return result;
         }
+    }       
+    public static class ICollectionExtensions
+    {
         public static ICollection<T> Expand<T>(this ICollection<T> l,T item)
         {
             l.Add(item);
