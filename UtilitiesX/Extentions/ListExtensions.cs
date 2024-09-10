@@ -52,7 +52,7 @@ namespace UtilitiesX.Extentions
             }
             return result;
         }
-        public static ICollection<T> Expand<T>(this List<T> l,T item)
+        public static ICollection<T> Expand<T>(this ICollection<T> l,T item)
         {
             l.Add(item);
             return l;
