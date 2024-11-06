@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UtilitiesX.Extentions
+namespace UtilitiesX.Extensions
 {
     public static class ObjectExtensions
     {
