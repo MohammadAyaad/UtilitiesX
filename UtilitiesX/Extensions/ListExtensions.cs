@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace UtilitiesX.Extensions
 {
-    public static class ObjectExtensions
-    {
-        public static V Transform<T,V>(this T obj, Func<T,V> transformer)
-        {
-            return transformer(obj);
-        }
-    }
+    
     public static class IEnumerableExtensions
     {
         public static IDictionary<TKey, TValue> Zip<T, TKey, TValue>(this IEnumerable<T> source, Func<T, TKey> keySelector, Func<T, TValue> valueSelector)
