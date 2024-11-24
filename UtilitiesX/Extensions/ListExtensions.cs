@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace UtilitiesX.Extensions
 {
-    
     public static class IEnumerableExtensions
     {
-        public static IDictionary<TKey, TValue> Zip<T, TKey, TValue>(this IEnumerable<T> source, Func<T, TKey> keySelector, Func<T, TValue> valueSelector)
+        public static IDictionary<TKey, TValue> Zip<T, TKey, TValue>(
+            this IEnumerable<T> source,
+            Func<T, TKey> keySelector,
+            Func<T, TValue> valueSelector
+        )
         {
             IDictionary<TKey, TValue> result = new Dictionary<TKey, TValue>();
             foreach (var item in source)
@@ -27,12 +30,13 @@ namespace UtilitiesX.Extensions
             }
         }
 
-        public static T Collect<T, V>(this IEnumerable<V> l, T collection, Func<V, T,T> Collector)
+        public static T Collect<T, V>(this IEnumerable<V> l, T collection, Func<V, T, T> Collector)
         {
             for (int i = 0; i < l.Count(); i++)
                 collection = Collector(l.ElementAt(i), collection);
             return collection;
         }
+
         public static IEnumerable<T> Collect<T>(this IEnumerable<IEnumerable<T>> l)
         {
             List<T> result = new List<T>();
@@ -43,17 +47,19 @@ namespace UtilitiesX.Extensions
             }
             return result;
         }
-    }       
+    }
+
     public static class ICollectionExtensions
     {
-        public static ICollection<T> Expand<T>(this ICollection<T> l,T item)
+        public static ICollection<T> Expand<T>(this ICollection<T> l, T item)
         {
             l.Add(item);
             return l;
         }
+
         public static ICollection<T> Expand<T>(this ICollection<T> l, IEnumerable<T> items)
         {
-            foreach(var i in items)
+            foreach (var i in items)
                 l.Add(i);
             return l;
         }

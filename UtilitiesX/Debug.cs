@@ -12,15 +12,16 @@ namespace UtilitiesX
         {
             Console.WriteLine(str);
         }
-        public static void Println<T>(this T o,Func<T,string> str)
+
+        public static void Println<T>(this T o, Func<T, string> str)
         {
             Console.WriteLine(str(o));
         }
+
         public static T PrintlnRt<T>(this T o, Func<T, string> str)
         {
             Console.WriteLine(str(o));
             return o;
         }
-
     }
 }

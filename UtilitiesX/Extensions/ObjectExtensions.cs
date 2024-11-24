@@ -12,16 +12,26 @@ public static class ObjectExtensions
     {
         return transformer(obj);
     }
-    public static ICollection<T> Flatten<T>(this T obj, Func<T,ICollection<T>> childrenOf)
+
+    public static ICollection<T> Flatten<T>(this T obj, Func<T, ICollection<T>> childrenOf)
     {
         return new List<T>()
             .Expand(childrenOf(obj).ForEachCollect(o => o.Flatten(childrenOf)).Collect())
             .Expand(obj);
     }
-    public static ICollection<V> FlattenTransform<T,V>(this T obj, Func<T, ICollection<T>> childrenOf, Func<T, V> transformer)
+
+    public static ICollection<V> FlattenTransform<T, V>(
+        this T obj,
+        Func<T, ICollection<T>> childrenOf,
+        Func<T, V> transformer
+    )
     {
         return new List<V>()
-            .Expand(childrenOf(obj).ForEachCollect(o => o.FlattenTransform(childrenOf, transformer)).Collect())
+            .Expand(
+                childrenOf(obj)
+                    .ForEachCollect(o => o.FlattenTransform(childrenOf, transformer))
+                    .Collect()
+            )
             .Expand(transformer(obj));
     }
 }
